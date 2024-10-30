@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMovieList } from './Api'; 
+import './MoviesList.css';
+
 
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"; 
 
@@ -22,9 +24,9 @@ const MovieList = () => {
     }
 
     return (
-        <div>
+        <div class="main">
             <h1>Popular Movies</h1>
-            <ul>
+            <ul class="popularmovie">
                 {movies.map(movie => (
                     <li key={movie.id}>
                         <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
