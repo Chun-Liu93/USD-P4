@@ -1,14 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import MovieList from './components/MoviesList'; 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <div>
+            <h1>My Movie App</h1>
+            <MovieList />
+        </div>
+    );
+};
 
 export default App;
