@@ -1,10 +1,11 @@
 import React from 'react';
 import MovieList from './components/MoviesList'; 
+import Navbar from './components/Navbar';
 
 const App = () => {
     return (
         <div>
-            <h1>My Movie App</h1>
+            <Navbar />
             <MovieList />
         </div>
     );

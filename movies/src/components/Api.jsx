@@ -3,7 +3,6 @@ const MOVIE_LIST_KEY = "https://api.themoviedb.org/3/movie/popular";
 // const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 // const GENRES_URL = "https://api.themoviedb.org/3/genre/movie/list";
 
-
 async function fetchMovieList(page = 1) {
     const popularMovieUrl = `${MOVIE_LIST_KEY}?api_key=${SECRET_KEY}&page=${page}`;
     try {
@@ -15,6 +14,7 @@ async function fetchMovieList(page = 1) {
 
         const data = await response.json();
         return data.results;
+
     } catch (error) {
         console.error('Error fetching movie list', error);
         return [];
