@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMovieList, fetchGenres } from './Api'; 
-
+import "../styles.css"
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"; 
 
 // Define genre colors
