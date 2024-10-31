@@ -30,10 +30,12 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
+    const [pages, setPages] = useState(1);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
-            const [movieData, genreData] = await Promise.all([fetchMovieList(), fetchGenres()]);
+            const [movieData, genreData] = await Promise.all([fetchMovieList(pages), fetchGenres()]);
             
             // Map genre IDs to genre names
             const genreMap = {};
@@ -47,7 +49,14 @@ const MovieList = () => {
         };
 
         loadMoviesAndGenres();
-    }, []);
+    }, [pages]);
+
+const leftPages = ()=>{
+    setPages(pages - 1);
+} 
+const rightPages = ()=>{
+    setPages(pages+1);
+} 
 
     if (loading) {
         return <div>Loading...</div>;
@@ -56,6 +65,9 @@ const MovieList = () => {
     return (
         <div class="main">
             <h1>Popular Movies</h1>
+            <button disabled={pages===1 ? true : false} onClick={leftPages}>prev</button>
+            <p>Pages: {pages}</p>
+            <button onClick={rightPages}>next</button>
             <ul class="popularmovie">
                 {movies.map(movie => (
                     <li key={movie.id}>

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const SECRET_KEY = "6bbb24dcee455a115bf0b1ff7adf9275";
 const MOVIE_LIST_KEY = "https://api.themoviedb.org/3/movie/popular";
 // const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
