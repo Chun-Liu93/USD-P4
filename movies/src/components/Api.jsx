@@ -3,28 +3,6 @@ const MOVIE_LIST_KEY = "https://api.themoviedb.org/3/movie/popular";
 // const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 const GENRES_URL = "https://api.themoviedb.org/3/genre/movie/list";
 
-// const genreColors = {
-//     'Action': 'generate-action',
-//     'Adventure': 'generate-adventure',
-//     'Animation': 'generate-animation',
-//     'Comedy': 'generate-comedy',
-//     'Crime': 'generate-crime',
-//     'Documentary': 'generate-documentary',
-//     'Drama': 'generate-drama',
-//     'Family': 'generate-family',
-//     'Fantasy': 'generate-fantasy',
-//     'History': 'generate-history',
-//     'Horror': 'generate-horror',
-//     'Music': 'generate-music',
-//     'Mystery': 'generate-mystery',
-//     'Romance': 'generate-romance',
-//     'Science Fiction': 'generate-scifi',
-//     'TV-Movie': 'generate-tv-movie',
-//     'Thriller': "generate-thriller",
-//     'War': 'generate-war',
-//     'Western': 'generate-western'
-// }
-
 async function fetchGenres() {
     const genreUrl = `${GENRES_URL}?api_key=${SECRET_KEY}`;
     try{
@@ -41,8 +19,13 @@ async function fetchGenres() {
     }
 }
 
-async function fetchMovieList(page = 1) {
-    const popularMovieUrl = `${MOVIE_LIST_KEY}?api_key=${SECRET_KEY}&page=${page}`;
+async function fetchMovieList(page = 1, genreId = null) {
+    let popularMovieUrl = `${MOVIE_LIST_KEY}?api_key=${SECRET_KEY}&page=${page}`;
+
+    if (genreId) {
+        popularMovieUrl += `&with_genres=$P{genreId}`;
+    }
+
     try {
         const response = await fetch(popularMovieUrl);
 

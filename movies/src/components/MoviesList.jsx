@@ -30,6 +30,7 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
+    const [selectedGenre, setSelectedGenre] = useState(""); 
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -49,6 +50,10 @@ const MovieList = () => {
         loadMoviesAndGenres();
     }, []);
 
+    const filteredMovies = selectedGenre 
+    ? movies.filter(movie => movie.genre_ids.includes(parseInt(selectedGenre))) 
+    : movies;
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -56,8 +61,16 @@ const MovieList = () => {
     return (
         <div>
             <h1>Popular Movies</h1>
+            
+            {/* Genre Filter Dropdown */}
+            <select onChange={(e) => setSelectedGenre(e.target.value)} value={selectedGenre}>
+                <option value="">All Genres</option>
+                {Object.entries(genres).map(([id, name]) => (
+                    <option key={id} value={id}>{name}</option>
+                ))}
+            </select>
             <ul>
-                {movies.map(movie => (
+                {filteredMovies.map(movie => (
                     <li key={movie.id}>
                         <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                         <h2>{movie.title}</h2>
