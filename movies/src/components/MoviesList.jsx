@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMovieList, fetchGenres } from './Api'; 
-import "../styles.css"
+import '../styles.css';
+
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"; 
 
 // Define genre colors
@@ -31,7 +32,7 @@ const MovieList = () => {
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
     const [pages, setPages] = useState(1);
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -63,19 +64,22 @@ const rightPages = ()=>{
     }
 
     return (
-        <div class="main">
+        <div className="main">
             <h1>Popular Movies</h1>
             <button disabled={pages===1 ? true : false} onClick={leftPages}>prev</button>
             <p>Pages: {pages}</p>
             <button onClick={rightPages}>next</button>
-            <ul class="popularmovie">
-                {movies.map(movie => (
-                    <li key={movie.id}>
+            <ul className="popularmovie">
+                {movies.map((movie,index) => (
+                    <li key={movie.id}
+                        onMouseEnter={()=>{setHoveredIndex(index)}}
+                        onMouseLeave={()=>{setHoveredIndex(null)}}
+                    >
                         <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                         <h2>{movie.title}</h2>
                         <p>Release Date: {movie.release_date}</p>
                         
-                        <div>
+                        <div class="genre" style={{ display: hoveredIndex === index ? 'flex' : 'none' }}>
                             {movie.genre_ids.map(id => {
                                 const genreName = genres[id];
                                 const genreClass = genreColors[genreName] || 'default-genre';
