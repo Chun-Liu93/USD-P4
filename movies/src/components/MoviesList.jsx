@@ -30,7 +30,8 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
-    const [selectedGenre, setSelectedGenre] = useState(""); 
+    const [selectedGenre, setSelectedGenre] = useState("");
+    const [searchQuery, setSearchQuery] = useState(""); 
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -50,9 +51,11 @@ const MovieList = () => {
         loadMoviesAndGenres();
     }, []);
 
-    const filteredMovies = selectedGenre 
-    ? movies.filter(movie => movie.genre_ids.includes(parseInt(selectedGenre))) 
-    : movies;
+    const filteredMovies = movies.filter(movie => {
+        const matchesGenre = selectedGenre ? movie.genre_ids.includes(parseInt(selectedGenre)) : true;
+        const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesGenre && matchesSearch;
+    });
 
     if (loading) {
         return <div>Loading...</div>;
@@ -69,6 +72,15 @@ const MovieList = () => {
                     <option key={id} value={id}>{name}</option>
                 ))}
             </select>
+
+            {/* Search Bar */}
+            <input 
+                type="text" 
+                placeholder="Search by title..." 
+                value={searchQuery} 
+                onChange={(e) => setSearchQuery(e.target.value)}
+            />
+
             <ul>
                 {filteredMovies.map(movie => (
                     <li key={movie.id}>
