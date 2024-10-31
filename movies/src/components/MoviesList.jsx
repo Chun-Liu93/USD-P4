@@ -75,19 +75,21 @@ const rightPages = ()=>{
                         onMouseEnter={()=>{setHoveredIndex(index)}}
                         onMouseLeave={()=>{setHoveredIndex(null)}}
                     >
-                        <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
+                        <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} 
+                        style={{ opacity: hoveredIndex === index ? 0.2 : 1 }}/>
                         <h2>{movie.title}</h2>
                         <p>Release Date: {movie.release_date}</p>
                         
                         <div class="genre" style={{ display: hoveredIndex === index ? 'flex' : 'none' }}>
+                            <p>Genre</p>
                             {movie.genre_ids.map(id => {
                                 const genreName = genres[id];
                                 const genreClass = genreColors[genreName] || 'default-genre';
                                 
                                 return (
-                                    <span key={id} className={genreClass}>
-                                        {genreName}
-                                    </span>
+                                        <span key={id} className={genreClass}>
+                                            {genreName}
+                                        </span>
                                 );
                             })}
                         </div>

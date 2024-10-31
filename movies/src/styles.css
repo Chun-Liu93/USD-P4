@@ -40,18 +40,23 @@
     font-size: 16px;
     text-align: center;
     width: 100%;
-    z-index: 10;
     top: 5px;
     left: 0;
+}
+.popularmovie .genre p{
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
 .genre span{
     padding:2px;
     border-radius: 4px;
     background-color: #fff;
-    margin: 2px 2px; 
+    margin: 6px 4px; 
 }
 .genre .generate-action{
-    background-color: blue;
+    background-color: lightcyan;
 }
 .genre .generate-adventure{
     background-color: red;
