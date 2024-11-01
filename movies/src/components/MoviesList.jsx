@@ -33,6 +33,8 @@ const MovieList = () => {
     const [pages, setPages] = useState(1);
     const [isDisabled, setIsDisabled] = useState(true);
 
+    const [selectedGenre, setSelectedGenre] = useState("");
+
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
             const [movieData, genreData] = await Promise.all([fetchMovieList(pages), fetchGenres()]);
@@ -58,6 +60,12 @@ const rightPages = ()=>{
     setPages(pages+1);
 } 
 
+    const filteredMovies = movies.filter(movie => {
+        const matchesGenre = selectedGenre ? movie.genre_ids.includes(parseInt(selectedGenre)) : true;
+        const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesGenre && matchesSearch;
+    });
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -70,6 +78,27 @@ const rightPages = ()=>{
             <button onClick={rightPages}>next</button>
             <ul class="popularmovie">
                 {movies.map(movie => (
+
+            
+            {/* Genre Filter Dropdown */}
+            <select onChange={(e) => setSelectedGenre(e.target.value)} value={selectedGenre}>
+                <option value="">All Genres</option>
+                {Object.entries(genres).map(([id, name]) => (
+                    <option key={id} value={id}>{name}</option>
+                ))}
+            </select>
+
+            {/* Search Bar */}
+            <input 
+                type="text" 
+                placeholder="Search by title..." 
+                value={searchQuery} 
+                onChange={(e) => setSearchQuery(e.target.value)}
+            />
+
+            <ul>
+                {filteredMovies.map(movie => (
+
                     <li key={movie.id}>
                         <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                         <h2>{movie.title}</h2>
