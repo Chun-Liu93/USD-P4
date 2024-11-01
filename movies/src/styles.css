@@ -1,32 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 .main{
     display: block;
     width: 1240px;
     margin: 0 auto;
     position: relative;
 }
+
 .main ul{
     list-style-type: none;
     padding: 0; 
     margin: 0; 
 }
+
 .main .popularmovie{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     width: 1240px;  
     column-gap: 23px;
 }
+
 .popularmovie img{
     width: 229.6px;
     height: 344.4px;
     border-radius: 5px;
 }
+
 .popularmovie h2{
     font-size: 16px;
     text-align: center;
     margin-top: 5px;
 }
+
 .popularmovie p{
     font-size: 16px;
     text-align: center;
     margin-top: -10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding:10px;
+    font-size: 30px;
+}
+
+.navbar li {
+    margin-right: 300px;
+}
+
+.navbar li:first-child {
+    margin-left: 250px;
+    margin-right: 300px;
+}
+
+.navbar li:last-child {
+    margin-left: 200px;
+    margin-right: 100px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    color: blue;
+}
+
+.navbar li a {
+    color:black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar ul {
+    text-decoration-color: black;
+    right: 5vw;
+    top: 0;
+    line-height: 80px;
+    overflow: visible;
+}
+
+.navbar li {
+  display: inline;
+  margin-right: 2vw;
+  float: left;
+  font-weight: bold;
 }
