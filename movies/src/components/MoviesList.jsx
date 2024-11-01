@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { fetchMovieList, fetchGenres } from './Api'; 
-import "../styles.css"
-const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"; 
+import { fetchMovieList, fetchGenres, fetchSearchResults } from './Api';
+import "../styles.css";
 
-// Define genre colors
+const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
 const genreColors = {
     'Action': 'generate-action',
     'Adventure': 'generate-adventure',
@@ -31,56 +31,57 @@ const MovieList = () => {
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
     const [pages, setPages] = useState(1);
-    const [isDisabled, setIsDisabled] = useState(true);
-
     const [selectedGenre, setSelectedGenre] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
-            const [movieData, genreData] = await Promise.all([fetchMovieList(pages), fetchGenres()]);
-            
-            // Map genre IDs to genre names
+            setLoading(true);
+            const genreData = await fetchGenres();
             const genreMap = {};
             genreData.forEach(genre => {
                 genreMap[genre.id] = genre.name;
             });
-
             setGenres(genreMap);
+            
+            let movieData = [];
+            if (searchQuery) {
+                movieData = await fetchSearchResults(searchQuery, pages);
+            } else {
+                movieData = await fetchMovieList(pages, selectedGenre);
+            }
             setMovies(movieData);
             setLoading(false);
         };
 
         loadMoviesAndGenres();
-    }, [pages]);
+    }, [pages, searchQuery, selectedGenre]);
 
-const leftPages = ()=>{
-    setPages(pages - 1);
-} 
-const rightPages = ()=>{
-    setPages(pages+1);
-} 
+    const handleSearchKeyPress = (e) => {
+        if (e.key === "Enter") {
+            setSearchQuery(e.target.value);
+            setPages(1); // Reset to first page on new search
+        }
+    };
+    
 
-    const filteredMovies = movies.filter(movie => {
-        const matchesGenre = selectedGenre ? movie.genre_ids.includes(parseInt(selectedGenre)) : true;
-        const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesGenre && matchesSearch;
-    });
+    const leftPages = () => {
+        if (pages > 1) setPages(pages - 1);
+    };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    const rightPages = () => {
+        setPages(pages + 1);
+    };
+
+    if (loading) return <div>Loading...</div>;
 
     return (
-        <div class="main">
+        <div className="main">
             <h1>Popular Movies</h1>
-            <button disabled={pages===1 ? true : false} onClick={leftPages}>prev</button>
-            <p>Pages: {pages}</p>
-            <button onClick={rightPages}>next</button>
-            <ul class="popularmovie">
-                {movies.map(movie => (
+            <button disabled={pages === 1} onClick={leftPages}>Prev</button>
+            <p>Page: {pages}</p>
+            <button onClick={rightPages}>Next</button>
 
-            
-            {/* Genre Filter Dropdown */}
             <select onChange={(e) => setSelectedGenre(e.target.value)} value={selectedGenre}>
                 <option value="">All Genres</option>
                 {Object.entries(genres).map(([id, name]) => (
@@ -88,36 +89,27 @@ const rightPages = ()=>{
                 ))}
             </select>
 
-            {/* Search Bar */}
+{/* Search Bar */}
             <input 
                 type="text" 
                 placeholder="Search by title..." 
-                value={searchQuery} 
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyPress}
             />
 
-            <ul>
-                {filteredMovies.map(movie => (
 
-                    <li key={movie.id}>
-                        <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
-                        <h2>{movie.title}</h2>
-                        <p>Release Date: {movie.release_date}</p>
-                        
-                        <div>
-                            {movie.genre_ids.map(id => {
-                                const genreName = genres[id];
-                                const genreClass = genreColors[genreName] || 'default-genre';
-                                
-                                return (
-                                    <span key={id} className={genreClass}>
-                                        {genreName}
-                                    </span>
-                                );
-                            })}
-                        </div>
-                    </li>
-                ))}
+            <ul className="popularmovie">
+                {movies.map(movie => {
+                    const movieGenreNames = movie.genre_ids.map(id => genres[id] || ""); 
+                    const genreClass = movieGenreNames.find(name => genreColors[name]) || "";
+
+                    return (
+                        <li key={movie.id} className={genreColors[genreClass]}>
+                            <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
+                            <h2>{movie.title}</h2>
+                            <p>Release Date: {movie.release_date}</p>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
