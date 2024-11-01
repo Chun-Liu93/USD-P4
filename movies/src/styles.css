@@ -1,45 +1,4 @@
-* {
-    padding: 0;
-    margin: 0;
-}
 
-.main{
-    display: block;
-    width: 1240px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.main ul{
-    list-style-type: none;
-    padding: 0; 
-    margin: 0; 
-}
-
-.main .popularmovie{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 1240px;  
-    column-gap: 23px;
-}
-
-.popularmovie img{
-    width: 229.6px;
-    height: 344.4px;
-    border-radius: 5px;
-}
-
-.popularmovie h2{
-    font-size: 16px;
-    text-align: center;
-    margin-top: 5px;
-}
-
-.popularmovie p{
-    font-size: 16px;
-    text-align: center;
-    margin-top: -10px;
-}
 
 nav {
     display: flex;
@@ -84,8 +43,77 @@ nav {
 }
 
 .navbar li {
-  display: inline;
-  margin-right: 2vw;
-  float: left;
-  font-weight: bold;
+    display: inline;
+    margin-right: 2vw;
+    float: left;
+    font-weight: bold;
+}
+
+
+
+.main{
+    display: block;
+    width: 1240px;
+    margin: 0 auto;
+    position: relative;
+}
+.main ul{
+    list-style-type: none;
+    padding: 0; 
+    margin: 0; 
+}
+.main .popularmovie{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 1240px;  
+    column-gap: 23px;
+}
+.popularmovie li{
+    position: relative;
+}
+.popularmovie img{
+    width: 229.6px;
+    height: 344.4px;
+    border-radius: 5px;
+}
+.popularmovie h2{
+    font-size: 16px;
+    text-align: center;
+    margin-top: 5px;
+}
+.popularmovie p{
+    font-size: 16px;
+    text-align: center;
+    margin-top: -10px;
+}
+.popularmovie .genre{
+    display: none;
+    flex-wrap: wrap;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+    top: 5px;
+    left: 0;
+}
+.popularmovie .genre p{
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.genre span{
+    padding:2px;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 2px 2px; 
+    margin: 6px 4px; 
+}
+.genre .generate-action{
+    background-color: blue;
+    background-color: lightcyan;
+}
+.genre .generate-adventure{
+    background-color: red;
 }
