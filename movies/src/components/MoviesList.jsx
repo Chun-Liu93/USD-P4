@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMovieList, fetchGenres } from './Api'; 
-
+import "../styles.css"
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"; 
 
 // Define genre colors
@@ -30,12 +30,14 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
+    const [pages, setPages] = useState(1);
+    const [isDisabled, setIsDisabled] = useState(true);
+
     const [selectedGenre, setSelectedGenre] = useState("");
-    const [searchQuery, setSearchQuery] = useState(""); 
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
-            const [movieData, genreData] = await Promise.all([fetchMovieList(), fetchGenres()]);
+            const [movieData, genreData] = await Promise.all([fetchMovieList(pages), fetchGenres()]);
             
             // Map genre IDs to genre names
             const genreMap = {};
@@ -49,7 +51,14 @@ const MovieList = () => {
         };
 
         loadMoviesAndGenres();
-    }, []);
+    }, [pages]);
+
+const leftPages = ()=>{
+    setPages(pages - 1);
+} 
+const rightPages = ()=>{
+    setPages(pages+1);
+} 
 
     const filteredMovies = movies.filter(movie => {
         const matchesGenre = selectedGenre ? movie.genre_ids.includes(parseInt(selectedGenre)) : true;
@@ -62,8 +71,14 @@ const MovieList = () => {
     }
 
     return (
-        <div>
+        <div class="main">
             <h1>Popular Movies</h1>
+            <button disabled={pages===1 ? true : false} onClick={leftPages}>prev</button>
+            <p>Pages: {pages}</p>
+            <button onClick={rightPages}>next</button>
+            <ul class="popularmovie">
+                {movies.map(movie => (
+
             
             {/* Genre Filter Dropdown */}
             <select onChange={(e) => setSelectedGenre(e.target.value)} value={selectedGenre}>
@@ -83,6 +98,7 @@ const MovieList = () => {
 
             <ul>
                 {filteredMovies.map(movie => (
+
                     <li key={movie.id}>
                         <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                         <h2>{movie.title}</h2>
