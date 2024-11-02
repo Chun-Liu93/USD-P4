@@ -1,5 +1,4 @@
 
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -7,19 +6,11 @@ nav {
     padding:10px;
     font-size: 30px;
 }
-
+.navbar {
+    margin-left: 50px;
+}
 .navbar li {
     margin-right: 300px;
-}
-
-.navbar li:first-child {
-    margin-left: 250px;
-    margin-right: 300px;
-}
-
-.navbar li:last-child {
-    margin-left: 200px;
-    margin-right: 100px;
 }
 
 .navbar a:hover {
@@ -48,8 +39,6 @@ nav {
     float: left;
     font-weight: bold;
 }
-
-
 
 .main{
     display: block;
