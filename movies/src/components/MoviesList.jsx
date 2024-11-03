@@ -32,7 +32,6 @@ const MovieList = () => {
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
     const [pages, setPages] = useState(1);
-    const [hoveredIndex, setHoveredIndex] = useState(null);
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -70,28 +69,29 @@ const rightPages = ()=>{
             <p>Pages: {pages}</p>
             <button onClick={rightPages}>next</button>
             <ul className="popularmovie">
-                {movies.map((movie,index) => (
-                    <li key={movie.id}
-                        onMouseEnter={()=>{setHoveredIndex(index)}}
-                        onMouseLeave={()=>{setHoveredIndex(null)}}
-                    >
-                        <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} 
-                        style={{ opacity: hoveredIndex === index ? 0.2 : 1 }}/>
-                        <h2>{movie.title}</h2>
-                        <p>Release Date: {movie.release_date}</p>
-                        
-                        <div class="genre" style={{ display: hoveredIndex === index ? 'flex' : 'none' }}>
-                            <p>Genre</p>
-                            {movie.genre_ids.map(id => {
-                                const genreName = genres[id];
-                                const genreClass = genreColors[genreName] || 'default-genre';
-                                
-                                return (
-                                        <span key={id} className={genreClass}>
-                                            {genreName}
-                                        </span>
-                                );
-                            })}
+                {movies.map((movie) => (
+                    <li key={movie.id}>
+                        <div className='movie'>
+                            <div className="genre">
+                                <div className='title'>Genre</div>
+                                <div className='genrespan'>
+                                {movie.genre_ids.map(id => {
+                                    const genreName = genres[id];
+                                    const genreClass = genreColors[genreName] || 'default-genre';
+                                    
+                                    return (
+                                            <span key={id} className={genreClass}>
+                                                {genreName}
+                                            </span>
+                                    );
+                                })}
+                                </div>
+                                <button className='like'>Like</button>
+                                <button className='block'>Block</button>
+                            </div>
+                            <img style={{opacity:0.2}} src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
+                            <h2>{movie.title}</h2>
+                            <p>Release Date: {movie.release_date}</p>
                         </div>
                     </li>
                 ))}

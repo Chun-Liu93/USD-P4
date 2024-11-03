@@ -15,8 +15,10 @@
     width: 1240px;  
     column-gap: 23px;
 }
-.popularmovie li{
+.popularmovie .movie{
     position: relative;
+    top: 0;
+    left: 0;
 }
 .popularmovie img{
     width: 229.6px;
@@ -35,25 +37,47 @@
 }
 .popularmovie .genre{
     display: none;
-    flex-wrap: wrap;
     position: absolute;
+    text-align: center;
+    width: 229.6px;
+}
+.popularmovie .genre .title{
+    font-weight: 700;
+    font-size: 20px;
+}
+.popularmovie .genre .genrespan{
+    display: flex;
+    flex-wrap: wrap;
     font-size: 16px;
     text-align: center;
     width: 100%;
-    top: 5px;
-    left: 0;
-}
-.popularmovie .genre p{
-    font-weight: 700;
-    font-size: 20px;
+    gap: 10px;
+    align-items: center;
+    justify-content:center;
     margin-top: 5px;
-    margin-left: 5px;
 }
 .genre span{
     padding:2px;
     border-radius: 4px;
-    background-color: #fff;
-    margin: 6px 4px; 
+    background-color: green; 
+}
+.genre .like{
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    top: 300px;
+    right: 120px;
+    padding: 10px;
+    z-index: 1;
+}
+.genre .block{
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    top: 300px;
+    left: 120px;
+    padding: 10px;
+    z-index: 1;
 }
 .genre .generate-action{
     background-color: lightcyan;
@@ -79,3 +103,10 @@
 .genre .generate-family{
     background-color: lightcoral;
 }
+
+.movie:hover .genre {
+    display: block;
+}
+/* .movie img:hover {
+    opacity: 0.2;
+} */
