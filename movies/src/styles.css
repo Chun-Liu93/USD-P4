@@ -31,10 +31,10 @@
     text-align: center;
     margin-top: 5px;
 }
-.popularmovie p{
+.popularmovie .genrep {
     font-size: 16px;
     text-align: center;
-    margin-top: -10px;
+    margin-top: 10px;
 }
 .popularmovie .genre {
     display: none;
@@ -72,6 +72,7 @@
     right: 120px;
     padding: 10px;
     z-index: 1;
+    cursor: pointer;
 }
 .genre .block{
     position: absolute;
@@ -81,6 +82,7 @@
     left: 120px;
     padding: 10px;
     z-index: 1;
+    cursor: pointer;
 }
 .genre .generate-action{
     background-color: lightcyan;
@@ -111,6 +113,6 @@
     display: block;
 }
 
-.movie img:hover {
+.movie:hover img{
     opacity: 0.2;
 }

@@ -86,12 +86,12 @@ const rightPages = ()=>{
                                     );
                                 })}
                                 </div>
+                                <p>Release Date: {movie.release_date}</p>
                                 <button className='like'>Like</button>
                                 <button className='block'>Block</button>
                             </div>
                             <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                             <h2>{movie.title}</h2>
-                            <p>Release Date: {movie.release_date}</p>
                         </div>
                     </li>
                 ))}
