@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { fetchMovieList, fetchGenres } from './Api'; 
-import '../styles.css';
+import { fetchMovieList, fetchGenres, fetchSearchResults } from './Api';
+import "../styles.css";
 
-const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"; 
+const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-// Define genre colors
 const genreColors = {
     'Action': 'generate-action',
     'Adventure': 'generate-adventure',
@@ -32,42 +31,63 @@ const MovieList = () => {
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
     const [pages, setPages] = useState(1);
+    const [selectedGenre, setSelectedGenre] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
-            const [movieData, genreData] = await Promise.all([fetchMovieList(pages), fetchGenres()]);
-            
-            // Map genre IDs to genre names
+            setLoading(true);
+            const genreData = await fetchGenres();
             const genreMap = {};
             genreData.forEach(genre => {
                 genreMap[genre.id] = genre.name;
             });
-
             setGenres(genreMap);
+            
+            let movieData = [];
+            if (searchQuery) {
+                movieData = await fetchSearchResults(searchQuery, pages);
+            } else {
+                movieData = await fetchMovieList(pages, selectedGenre);
+            }
             setMovies(movieData);
             setLoading(false);
         };
 
         loadMoviesAndGenres();
-    }, [pages]);
+    }, [pages, searchQuery, selectedGenre]);
 
-const leftPages = ()=>{
-    setPages(pages - 1);
-} 
-const rightPages = ()=>{
-    setPages(pages+1);
-} 
+    const handleSearchKeyPress = (e) => {
+        if (e.key === "Enter") {
+            setSearchQuery(e.target.value);
+            setPages(1); // Reset to first page on new search
+        }
+    };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    const leftPages = () => {
+        if (pages > 1) setPages(pages - 1);
+    };
+
+    const rightPages = () => {
+        setPages(pages + 1);
+    };
+
+    if (loading) return <div>Loading...</div>;
 
     return (
         <div className="main">
             <h1>Popular Movies</h1>
-            <button disabled={pages===1 ? true : false} onClick={leftPages}>prev</button>
+            <button disabled={pages === 1} onClick={leftPages}>prev</button>
             <p>Pages: {pages}</p>
             <button onClick={rightPages}>next</button>
+
+            {/* Search Bar */}
+            <input 
+                type="text" 
+                placeholder="Search by title..." 
+                onKeyDown={handleSearchKeyPress}
+            />
+
             <ul className="popularmovie">
                 {movies.map((movie) => (
                     <li key={movie.id}>
@@ -80,9 +100,9 @@ const rightPages = ()=>{
                                     const genreClass = genreColors[genreName] || 'default-genre';
                                     
                                     return (
-                                            <span key={id} className={genreClass}>
-                                                {genreName}
-                                            </span>
+                                        <span key={id} className={genreClass}>
+                                            {genreName}
+                                        </span>
                                     );
                                 })}
                                 </div>

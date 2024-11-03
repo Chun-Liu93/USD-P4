@@ -1,3 +1,35 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: black;
+}
+
+.navbar ul {
+    display: flex; 
+    padding: 0;   
+    margin: 0;     
+}
+
+.navbar li {
+    margin-right: 30px;
+    display: flex;
+    list-style-type: none;
+}
+
+.navbar a:hover {
+    background-color: transparent;
+    color: lightblue;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+
 .main{
     display: block;
     width: 1240px;
