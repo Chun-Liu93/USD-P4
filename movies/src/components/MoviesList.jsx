@@ -44,16 +44,12 @@ const MovieList = () => {
             });
             setGenres(genreMap);
             
-            let movieData = [];
-            if (searchQuery) {
-                movieData = await fetchSearchResults(searchQuery, pages);
-            } else {
-                movieData = await fetchMovieList(pages, selectedGenre);
-            }
+            // Fetch movies based on search query and selected genre
+            const movieData = await fetchMovieList(pages, selectedGenre, searchQuery);
             setMovies(movieData);
             setLoading(false);
         };
-
+    
         loadMoviesAndGenres();
     }, [pages, searchQuery, selectedGenre]);
 
@@ -81,6 +77,14 @@ const MovieList = () => {
             <p>Pages: {pages}</p>
             <button onClick={rightPages}>next</button>
 
+            {/* Genre Selector */}
+            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
+                <option value="">All Genres</option>
+                {Object.entries(genres).map(([id, name]) => (
+                    <option key={id} value={id}>{name}</option>
+                ))}
+            </select>
+
             {/* Search Bar */}
             <input 
                 type="text" 
@@ -95,16 +99,16 @@ const MovieList = () => {
                             <div className="genre">
                                 <div className='title'>Genre</div>
                                 <div className='genrespan'>
-                                {movie.genre_ids.map(id => {
-                                    const genreName = genres[id];
-                                    const genreClass = genreColors[genreName] || 'default-genre';
-                                    
-                                    return (
-                                        <span key={id} className={genreClass}>
-                                            {genreName}
-                                        </span>
-                                    );
-                                })}
+                                    {movie.genre_ids.map(id => {
+                                        const genreName = genres[id];
+                                        const genreClass = genreColors[genreName] || 'default-genre';
+                                        
+                                        return (
+                                            <span key={id} className={genreClass}>
+                                                {genreName}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
                                 <p>Release Date: {movie.release_date}</p>
                                 <button className='like'>Like</button>

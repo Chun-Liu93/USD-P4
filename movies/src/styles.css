@@ -120,7 +120,7 @@
     background-color: lightcyan;
 }
 .genre .generate-adventure{
-    background-color: red;
+    background-color: rgb(170, 88, 88);
 }
 .genre .generate-animation{
     background-color: yellow;
@@ -139,6 +139,50 @@
 }
 .genre .generate-family{
     background-color: lightcoral;
+}
+
+.genre .generate-fantasy{
+    background-color: rgb(248, 162, 34);
+}
+
+.genre .generate-history{
+    background-color: rgb(32, 186, 168);
+}
+
+.genre .generate-horror{
+    background-color: #ff0000;
+}
+
+.genre .generate-music{
+    background-color: rgb(20, 102, 196);
+}
+
+.genre .generate-mystery{
+    background-color: rgb(124, 124, 124);
+}
+
+.genre .generate-romance{
+    background-color: rgb(241, 100, 222);
+}
+
+.genre .generate-scifi{
+    background-color: rgb(181, 64, 213);
+}
+
+.genre .generate-tv-movie{
+    background-color: rgb(94, 23, 180);
+}
+
+.genre .generate-thriller{
+    background-color: rgb(89, 82, 82);
+}
+
+.genre .generate-war{
+    background-color: rgb(51, 0, 255);
+}
+
+.genre .generate-western{
+    background-color: rgb(174, 163, 5);
 }
 
 .movie:hover .genre {

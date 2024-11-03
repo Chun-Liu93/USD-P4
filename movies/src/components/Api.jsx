@@ -24,9 +24,11 @@ async function fetchGenres() {
 async function fetchMovieList(page = 1, genreId = null, searchQuery = "") {
     let movieUrl;
 
-    // Choose the appropriate URL based on whether there's a search query
     if (searchQuery) {
         movieUrl = `${SEARCH_URL}?api_key=${SECRET_KEY}&query=${encodeURIComponent(searchQuery)}&page=${page}`;
+        if (genreId) {
+            movieUrl += `&with_genres=${genreId}`;
+        }
     } else {
         movieUrl = `${MOVIE_LIST_KEY}?api_key=${SECRET_KEY}&page=${page}`;
         if (genreId) {
@@ -36,7 +38,6 @@ async function fetchMovieList(page = 1, genreId = null, searchQuery = "") {
 
     try {
         const response = await fetch(movieUrl);
-
         if (!response.ok) {
             throw new Error("Network response not ok");
         }
@@ -49,6 +50,7 @@ async function fetchMovieList(page = 1, genreId = null, searchQuery = "") {
         return [];
     }
 }
+
 
 async function fetchSearchResults(query, page = 1) {
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${SECRET_KEY}&query=${encodeURIComponent(query)}&page=${page}`;
