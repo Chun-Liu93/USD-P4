@@ -89,7 +89,7 @@ const rightPages = ()=>{
                                 <button className='like'>Like</button>
                                 <button className='block'>Block</button>
                             </div>
-                            <img style={{opacity:0.2}} src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
+                            <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                             <h2>{movie.title}</h2>
                             <p>Release Date: {movie.release_date}</p>
                         </div>
