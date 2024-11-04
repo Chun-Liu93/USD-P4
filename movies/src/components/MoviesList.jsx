@@ -43,9 +43,11 @@ const MovieList = () => {
                 genreMap[genre.id] = genre.name;
             });
             setGenres(genreMap);
+            console.log("Fetched Genres:", genreMap);
             
-            // Fetch movies based on search query and selected genre
-            const movieData = await fetchMovieList(pages, selectedGenre, searchQuery);
+            // fetches movies based on search query and selected genre
+            let movieData = await fetchMovieList(pages, selectedGenre, searchQuery);
+            console.log("Fetched Movies:", movieData);
             setMovies(movieData);
             setLoading(false);
         };
@@ -56,7 +58,7 @@ const MovieList = () => {
     const handleSearchKeyPress = (e) => {
         if (e.key === "Enter") {
             setSearchQuery(e.target.value);
-            setPages(1); // Reset to first page on new search
+            setPages(1); // reset to first page on new search
         }
     };
 
@@ -77,7 +79,7 @@ const MovieList = () => {
             <p>Pages: {pages}</p>
             <button onClick={rightPages}>next</button>
 
-            {/* Genre Selector */}
+            {/* genre Selector */}
             <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
                 <option value="">All Genres</option>
                 {Object.entries(genres).map(([id, name]) => (
@@ -85,7 +87,7 @@ const MovieList = () => {
                 ))}
             </select>
 
-            {/* Search Bar */}
+            {/* search Bar */}
             <input 
                 type="text" 
                 placeholder="Search by title..." 
