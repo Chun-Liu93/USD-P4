@@ -29,6 +29,93 @@
     font-size: 18px;
 }
 
+h1 {
+    margin-left: 100px;
+    text-align: center;
+}
+   
+.pagecss {
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px;
+    margin-left: 100px;
+}
+
+.pagecss p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.pagecss button {
+    background-color: grey;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.pagecss button:hover {
+    background-color: blue; /* 初始背景色 */
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none; 
+    font-size: 16px;
+}
+.prevBtn {
+    background-color: grey;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.prevBtn.disabled {
+    background-color: green;
+    color: lightgray;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.main input{
+    background-color: #f0f0f0;
+    width: 200px;
+    padding: 10px;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+input:hover {
+    background-color: #f0f0f0;
+}
+
+input:focus {
+    border-color: blue;
+    outline: none;
+}
+.main select {
+    background-color: #f0f0f0;
+    width: 200px;
+    padding: 10px;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 6px;
+    margin-bottom: 20px;
+}
+
+select:focus {
+    border-color: blue;
+    outline: none;
+}
 
 .main{
     display: block;

@@ -73,12 +73,14 @@ const MovieList = () => {
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="main">
-            <h1>Popular Movies</h1>
-            <button disabled={pages === 1} onClick={leftPages}>prev</button>
+        <>
+        <h1>Popular Movies</h1>
+        <div className='pagecss'>
+            <button className="prevBtn" disabled={pages === 1} onClick={leftPages}>prev</button>
             <p>Pages: {pages}</p>
             <button onClick={rightPages}>next</button>
-
+        </div>
+        <div className="main">
             {/* genre Selector */}
             <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
                 <option value="">All Genres</option>
@@ -123,6 +125,7 @@ const MovieList = () => {
                 ))}
             </ul>
         </div>
+        </>
     );
 };
 
