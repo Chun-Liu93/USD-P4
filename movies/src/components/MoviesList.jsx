@@ -26,7 +26,7 @@ const genreColors = {
     'Western': 'generate-western'
 };
 
-const MovieList = () => {
+const MovieList = ({ onBlockMovie , onLikeMovie}) => {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState({});
     const [loading, setLoading] = useState(true);
@@ -113,8 +113,8 @@ const MovieList = () => {
                                     })}
                                 </div>
                                 <p>Release Date: {movie.release_date}</p>
-                                <button className='like'>Like</button>
-                                <button className='block'>Block</button>
+                                <button className='like' onClick={() => onLikeMovie(movie)}>Like</button>
+                                <button className='block' onClick={() => onBlockMovie(movie)}>Block</button>
                             </div>
                             <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                             <h2>{movie.title}</h2>
