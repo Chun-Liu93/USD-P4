@@ -1,9 +1,10 @@
-
 .navbar {
     display: flex;
     justify-content: space-between;
     padding: 15px 20px;
     background-color: black;
+    max-width: 100%; /* Adjusts to the screen width */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better separation */
 }
 
 .navbar ul {
@@ -18,52 +19,148 @@
     list-style-type: none;
 }
 
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.125rem; /* Using rem for better responsiveness */
+}
+
 .navbar a:hover {
     background-color: transparent;
     color: lightblue;
 }
 
-.navbar a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
+.main {
+    display: block;
+    max-width: 1240px; /* Max width for the main content */
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px; /* Optional padding for smaller screens */
+}
+
+.main ul {
+    list-style-type: none;
+    padding: 0; 
+    margin: 0; 
+}
+
+.main .popularmovie {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 23px; /* Use gap for spacing */
+}
+
+.popularmovie .movie {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.popularmovie img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px;
+    z-index: 0;
+}
+
+.popularmovie h2,
+.popularmovie .genrep {
+    font-size: 1rem; /* Responsive font size */
+    text-align: center;
+    margin-top: 5px;
+}
+
+.popularmovie .genre {
+    display: none;
+    position: absolute;
+    text-align: center;
+    width: 100%; /* Make the genre container responsive */
+    z-index: 10; 
+}
+
+.popularmovie .genre .title {
+    font-weight: 700;
+    font-size: 1.25rem; /* Responsive font size */
+}
+
+.popularmovie .genre .genrespan {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1rem; /* Responsive font size */
+    text-align: center;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.genre span {
+    padding: 2px;
+    border-radius: 4px;
+    background-color: green; 
+}
+.genre .block{
+    left: 120px; 
+}
+.genre .like{
+    right: 120px; 
+}
+.genre .like,
+.genre .block {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    top: 300px; 
+    padding: 10px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.genre .generate-action { background-color: lightcyan; }
+.genre .generate-adventure { background-color: rgb(170, 88, 88); }
+.genre .generate-animation { background-color: yellow; }
+.genre .generate-comedy { background-color: pink; }
+.genre .generate-crime { background-color: green; }
+.genre .generate-documentary { background-color: greenyellow; }
+.genre .generate-drama { background-color: lightblue; }
+.genre .generate-family { background-color: lightcoral; }
+.genre .generate-fantasy { background-color: rgb(248, 162, 34); }
+.genre .generate-history { background-color: rgb(32, 186, 168); }
+.genre .generate-horror { background-color: #ff0000; }
+.genre .generate-music { background-color: rgb(20, 102, 196); }
+.genre .generate-mystery { background-color: rgb(124, 124, 124); }
+.genre .generate-romance { background-color: rgb(241, 100, 222); }
+.genre .generate-scifi { background-color: rgb(181, 64, 213); }
+.genre .generate-tv-movie { background-color: rgb(94, 23, 180); }
+.genre .generate-thriller { background-color: rgb(89, 82, 82); }
+.genre .generate-war { background-color: rgb(51, 0, 255); }
+.genre .generate-western { background-color: rgb(174, 163, 5); }
+
+.movie:hover .genre {
+    display: block;
+}
+
+.movie:hover img {
+    opacity: 0.2;
 }
 
 h1 {
-    margin-left: 100px;
     text-align: center;
 }
-   
+
 .pagecss {
     display: flex;
     justify-content: center;
-    padding: 20px 20px;
+    padding: 20px;
     margin-left: 100px;
 }
 
 .pagecss p {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 0 20px; /* Adjusted margin */
 }
 
-.pagecss button {
-    background-color: grey;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-}
-
-.pagecss button:hover {
-    background-color: blue; /* 初始背景色 */
-    color: white;
-    border: none;
-    text-align: center;
-    text-decoration: none; 
-    font-size: 16px;
-}
+.pagecss button,
 .prevBtn {
     background-color: grey;
     color: white;
@@ -71,9 +168,12 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: relative;
 }
 
+.pagecss button:hover,
+.prevBtn:hover {
+    background-color: blue;
+}
 
 .prevBtn.disabled {
     background-color: green;
@@ -82,200 +182,102 @@ h1 {
     pointer-events: none;
 }
 
-.main input{
-    background-color: #f0f0f0;
-    width: 200px;
-    padding: 10px;
-    border: 3px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-input:hover {
-    background-color: #f0f0f0;
-}
-
-input:focus {
-    border-color: blue;
-    outline: none;
-}
+.main input,
 .main select {
     background-color: #f0f0f0;
-    width: 200px;
+    width: 200px; /* Fixed width, can be adjusted */
     padding: 10px;
     border: 3px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
-    margin-left: 6px;
-    margin-bottom: 20px;
+    margin: 10px 20px 20px 0; /* Responsive margin */
 }
 
+input:hover,
+select:hover {
+    background-color: #f0f0f0;
+}
+
+input:focus,
 select:focus {
     border-color: blue;
     outline: none;
 }
 
-.main{
-    display: block;
-    width: 1240px;
-    margin: 0 auto;
-    position: relative;
-}
-.main ul{
-    list-style-type: none;
-    padding: 0; 
-    margin: 0; 
-}
-.main .popularmovie{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 1240px;  
-    column-gap: 23px;
-}
-.popularmovie .movie{
-    position: relative;
-    top: 0;
-    left: 0;
-}
-.popularmovie img{
-    width: 229.6px;
-    height: 344.4px;
-    border-radius: 5px;
-    z-index: 0;
-}
-.popularmovie h2{
-    font-size: 16px;
-    text-align: center;
-    margin-top: 5px;
-}
-.popularmovie .genrep {
-    font-size: 16px;
-    text-align: center;
-    margin-top: 10px;
-}
-.popularmovie .genre {
-    display: none;
-    position: absolute;
-    text-align: center;
-    width: 229.6px;
-    z-index: 10; 
-}
-
-.popularmovie .genre .title{
-    font-weight: 700;
-    font-size: 20px;
-}
-.popularmovie .genre .genrespan{
+.pagination {
     display: flex;
-    flex-wrap: wrap;
-    font-size: 16px;
-    text-align: center;
-    width: 100%;
-    gap: 10px;
-    align-items: center;
-    justify-content:center;
-    margin-top: 5px;
-}
-.genre span{
-    padding:2px;
-    border-radius: 4px;
-    background-color: green; 
-}
-.genre .like{
-    position: absolute;
-    width: 60px;
-    height: 40px;
-    top: 300px;
-    right: 120px;
-    padding: 10px;
-    z-index: 1;
-    cursor: pointer;
-}
-.genre .block{
-    position: absolute;
-    width: 60px;
-    height: 40px;
-    top: 300px;
-    left: 120px;
-    padding: 10px;
-    z-index: 1;
-    cursor: pointer;
-}
-.genre .generate-action{
-    background-color: lightcyan;
-}
-.genre .generate-adventure{
-    background-color: rgb(170, 88, 88);
-}
-.genre .generate-animation{
-    background-color: yellow;
-}
-.genre .generate-comedy{
-    background-color: pink;
-}
-.genre .generate-crime{
-    background-color: green;
-}
-.genre .generate-documentary{
-    background-color: greenyellow;
-}
-.genre .generate-drama{
-    background-color: lightblue;
-}
-.genre .generate-family{
-    background-color: lightcoral;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 20px;
 }
 
-.genre .generate-fantasy{
-    background-color: rgb(248, 162, 34);
+.pagination ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+    display: flex;
 }
 
-.genre .generate-history{
-    background-color: rgb(32, 186, 168);
+.pagination a {
+    text-decoration: none; /* Remove underline from links */
+    color: black; /* Default text color */
+    font-size: 1rem; /* Responsive font size */
 }
 
-.genre .generate-horror{
-    background-color: #ff0000;
+.pagination a:hover {
+    color: blue; /* Change color on hover */
 }
 
-.genre .generate-music{
-    background-color: rgb(20, 102, 196);
+.pagination .active a {
+    font-weight: bold; /* Make active page number bold */
+    color: red; /* Active page color */
 }
 
-.genre .generate-mystery{
-    background-color: rgb(124, 124, 124);
+/* Media Queries for Small Screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: center; /* Center items */
+    }
+
+    .navbar li {
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 10px; /* Add margin below each item */
+    }
+
+    .main {
+        padding: 0 10px; /* Reduce padding for small screens */
+    }
+
+    .main .popularmovie {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Smaller columns */
+    }
+
+    h1 {
+        margin-left: 0; /* Center the title on small screens */
+        margin-top: 20px; /* Add margin to top */
+    }
+
+    .pagecss {
+        margin-left: 0; /* Center pagination on small screens */
+    }
+
+    .main input,
+    .main select {
+        width: 100%; /* Full width on small screens */
+    }
 }
 
-.genre .generate-romance{
-    background-color: rgb(241, 100, 222);
-}
+@media (max-width: 480px) {
+    .navbar a {
+        font-size: 1rem; /* Smaller font size for mobile */
+    }
 
-.genre .generate-scifi{
-    background-color: rgb(181, 64, 213);
-}
+    .pagination a {
+        font-size: 0.875rem; /* Smaller font size for pagination */
+    }
 
-.genre .generate-tv-movie{
-    background-color: rgb(94, 23, 180);
-}
-
-.genre .generate-thriller{
-    background-color: rgb(89, 82, 82);
-}
-
-.genre .generate-war{
-    background-color: rgb(51, 0, 255);
-}
-
-.genre .generate-western{
-    background-color: rgb(174, 163, 5);
-}
-
-.movie:hover .genre {
-    display: block;
-}
-
-.movie:hover img{
-    opacity: 0.2;
+    .pagination button {
+        padding: 8px 16px; /* Adjust button padding */
+    }
 }

@@ -1,5 +1,7 @@
+// src/components/MoviesList.jsx
 import React, { useEffect, useState } from 'react';
-import { fetchMovieList, fetchGenres, fetchSearchResults } from './Api';
+import { fetchMovieList, fetchGenres } from './Api';
+import Pagination from './Pagination'; 
 import "../styles.css";
 
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
@@ -45,7 +47,7 @@ const MovieList = () => {
             setGenres(genreMap);
             console.log("Fetched Genres:", genreMap);
             
-            // fetches movies based on search query and selected genre
+            // Fetch movies based on search query and selected genre
             let movieData = await fetchMovieList(pages, selectedGenre, searchQuery);
             console.log("Fetched Movies:", movieData);
             setMovies(movieData);
@@ -58,30 +60,20 @@ const MovieList = () => {
     const handleSearchKeyPress = (e) => {
         if (e.key === "Enter") {
             setSearchQuery(e.target.value);
-            setPages(1); // reset to first page on new search
+            setPages(1); // Reset to first page on new search
         }
-    };
-
-    const leftPages = () => {
-        if (pages > 1) setPages(pages - 1);
-    };
-
-    const rightPages = () => {
-        setPages(pages + 1);
     };
 
     if (loading) return <div>Loading...</div>;
 
     return (
-        <>
-        <h1>Popular Movies</h1>
-        <div className='pagecss'>
-            <button className="prevBtn" disabled={pages === 1} onClick={leftPages}>prev</button>
-            <p>Pages: {pages}</p>
-            <button onClick={rightPages}>next</button>
-        </div>
         <div className="main">
-            {/* genre Selector */}
+            <h1>Popular Movies</h1>
+
+            {/* Pagination component */}
+            <Pagination pages={pages} setPages={setPages} />
+
+            {/* Genre Selector */}
             <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
                 <option value="">All Genres</option>
                 {Object.entries(genres).map(([id, name]) => (
@@ -89,7 +81,7 @@ const MovieList = () => {
                 ))}
             </select>
 
-            {/* search Bar */}
+            {/* Search Bar */}
             <input 
                 type="text" 
                 placeholder="Search by title..." 
@@ -125,7 +117,6 @@ const MovieList = () => {
                 ))}
             </ul>
         </div>
-        </>
     );
 };
 
