@@ -100,14 +100,18 @@
     border-radius: 4px;
     background-color: green; 
 }
-
+.genre .block{
+    left: 120px; 
+}
+.genre .like{
+    right: 120px; 
+}
 .genre .like,
 .genre .block {
     position: absolute;
     width: 60px;
     height: 40px;
-    top: 300px; /* Consider adjusting for responsiveness if needed */
-    right: 120px; /* Consider adjusting for responsiveness if needed */
+    top: 300px; 
     padding: 10px;
     z-index: 1;
     cursor: pointer;
