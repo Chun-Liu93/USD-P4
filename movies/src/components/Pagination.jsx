@@ -11,9 +11,9 @@ const Pagination = ({ pages, setPages }) => {
 
     return (
         <div className="pagination">
-            <button disabled={pages === 1} onClick={leftPages}>prev</button>
+            <button disabled={pages === 1} onClick={leftPages}>Prev</button>
             <p>Pages: {pages}</p>
-            <button onClick={rightPages}>next</button>
+            <button onClick={rightPages}>Next</button>
         </div>
     );
 };
