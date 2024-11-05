@@ -25,15 +25,17 @@ async function fetchMovieList(page = 1, genreId = null, searchQuery = "") {
     let movieUrl;
 
     if (searchQuery) {
+        // Search endpoint for searching by title and filtering with genres
         movieUrl = `${SEARCH_URL}?api_key=${SECRET_KEY}&query=${encodeURIComponent(searchQuery)}&page=${page}`;
         if (genreId) {
             movieUrl += `&with_genres=${genreId}`;
         }
+    } else if (genreId) {
+        // Discover endpoint for filtering by genre ID only
+        movieUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${SECRET_KEY}&with_genres=${genreId}&page=${page}`;
     } else {
+        // Default to popular movies if no genre or search query is specified
         movieUrl = `${MOVIE_LIST_KEY}?api_key=${SECRET_KEY}&page=${page}`;
-        if (genreId) {
-            movieUrl += `&with_genres=${genreId}`;
-        }
     }
 
     try {
@@ -50,6 +52,7 @@ async function fetchMovieList(page = 1, genreId = null, searchQuery = "") {
         return [];
     }
 }
+
 
 
 async function fetchSearchResults(query, page = 1) {
