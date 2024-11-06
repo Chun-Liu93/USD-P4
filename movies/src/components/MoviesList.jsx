@@ -73,14 +73,6 @@ const MovieList = () => {
             {/* Pagination component */}
             <Pagination pages={pages} setPages={setPages} />
 
-            {/* Genre Selector */}
-            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
-                <option value="">All Genres</option>
-                {Object.entries(genres).map(([id, name]) => (
-                    <option key={id} value={id}>{name}</option>
-                ))}
-            </select>
-
             {/* Search Bar */}
             <input 
                 type="text" 
@@ -88,6 +80,14 @@ const MovieList = () => {
                 onKeyDown={handleSearchKeyPress}
             />
 
+            {/* Genre Selector */}
+            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
+                <option value="">All Genres</option>
+                {Object.entries(genres).map(([id, name]) => (
+                    <option key={id} value={id}>{name}</option>
+                ))}
+            </select>
+            
             <ul className="popularmovie">
                 {movies.map((movie) => (
                     <li key={movie.id}>

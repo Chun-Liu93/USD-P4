@@ -229,11 +229,11 @@ select:focus {
     }
 
     .main select {
-        width: 100%; /* Full width on small screens */
+        width: 99%; 
     }
 
     .main input {
-        width: 96%;
+        width: 93%;
     }
 }
 
