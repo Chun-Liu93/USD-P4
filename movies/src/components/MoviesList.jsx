@@ -37,6 +37,8 @@ const MovieList = () => {
     const [selectedGenre, setSelectedGenre] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
     const { handleBlockMovie, handleLikeMovie } = useMovies();
+    const [blockMessage, setBlockMessage] = useState("");
+    const [likeMessage, setLikeMessage] = useState("");
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -70,12 +72,29 @@ const MovieList = () => {
         }
     };
 
+    const likeMovie=(movie)=>{
+        handleLikeMovie(movie);
+        setLikeMessage(`${movie.title} has been liked`);
+        setTimeout(() => {
+            setLikeMessage(""); 
+        }, 1500);
+    }
+    
+    const blockMovie=(movie)=>{
+        handleBlockMovie(movie);
+        setMovies(prevMovies => prevMovies.filter(m => m.id !== movie.id));
+        setBlockMessage(`${movie.title} has been blocked`);
+        setTimeout(() => {
+            setBlockMessage(""); 
+        }, 1500);
+    }
     if (loading) return <div>Loading...</div>;
 
     return (
         <div className="main">
             <h1>Popular Movies</h1>
-
+            {blockMessage && <div className="block-message">{blockMessage}</div>}
+            {likeMessage && <div className="like-message">{likeMessage}</div>}
             {/* Pagination component */}
             <Pagination pages={pages} setPages={setPages} />
 
@@ -113,8 +132,8 @@ const MovieList = () => {
                                     })}
                                 </div>
                                 <p>Release Date: {movie.release_date}</p>
-                                <button className='like' onClick={()=>{handleLikeMovie(movie)}}>Like</button>
-                                <button className='block' onClick={()=>{handleBlockMovie(movie)}}>Block</button>
+                                <button className='like' onClick={()=>{likeMovie(movie)}}>Like</button>
+                                <button className='block' onClick={()=>{blockMovie(movie)}}>Block</button>
                             </div>
                             <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                             <h2>{movie.title}</h2>
