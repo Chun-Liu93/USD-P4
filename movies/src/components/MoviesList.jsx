@@ -41,22 +41,26 @@ const MovieList = () => {
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
             setLoading(true);
-            const genreData = await fetchGenres();
-            const genreMap = {};
-            genreData.forEach(genre => {
-                genreMap[genre.id] = genre.name;
-            });
-            setGenres(genreMap);
-            console.log("Fetched Genres:", genreMap);
-            
-            // Fetch movies based on search query and selected genre
-            let movieData = await fetchMovieList(pages, selectedGenre, searchQuery);
-            console.log("Fetched Movies:", movieData);
-            setMovies(movieData);
-            setLoading(false);
+            try {
+                const genreData = await fetchGenres();
+                const genreMap = {};
+
+                genreData.forEach(genre => {
+                    genreMap[genre.id] = genre.name;
+                });
+                setGenres(genreMap);
+
+                const movieData = await fetchMovieList(pages, selectedGenre, searchQuery);
+                setMovies(movieData);
+            } catch (error) {
+                console.error("Error fetching movies or genres:", error);
+            } finally {
+                setLoading(false);
+            }
         };
-    
+
         loadMoviesAndGenres();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pages, searchQuery, selectedGenre]);
 
     const handleSearchKeyPress = (e) => {
