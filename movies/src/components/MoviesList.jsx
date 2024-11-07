@@ -36,9 +36,7 @@ const MovieList = () => {
     const [pages, setPages] = useState(1);
     const [selectedGenre, setSelectedGenre] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
-    const { handleBlockMovie, handleLikeMovie } = useMovies();
-    const [blockMessage, setBlockMessage] = useState("");
-    const [likeMessage, setLikeMessage] = useState("");
+    const { handleBlockMovie, handleLikeMovie, blockedMovies } = useMovies();
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -74,27 +72,20 @@ const MovieList = () => {
 
     const likeMovie=(movie)=>{
         handleLikeMovie(movie);
-        setLikeMessage(`${movie.title} has been liked`);
-        setTimeout(() => {
-            setLikeMessage(""); 
-        }, 1500);
+        alert(`${movie.title} has been Liked!`)
     }
     
     const blockMovie=(movie)=>{
         handleBlockMovie(movie);
-        setMovies(prevMovies => prevMovies.filter(m => m.id !== movie.id));
-        setBlockMessage(`${movie.title} has been blocked`);
-        setTimeout(() => {
-            setBlockMessage(""); 
-        }, 1500);
+        alert(`${movie.title} has been Blocked!`)
     }
+    const Movies = movies.filter(movie => !blockedMovies.some(blockedMovie => blockedMovie.id === movie.id));
+    
     if (loading) return <div>Loading...</div>;
 
     return (
         <div className="main">
             <h1>Popular Movies</h1>
-            {blockMessage && <div className="block-message">{blockMessage}</div>}
-            {likeMessage && <div className="like-message">{likeMessage}</div>}
             {/* Pagination component */}
             <Pagination pages={pages} setPages={setPages} />
 
@@ -114,7 +105,7 @@ const MovieList = () => {
             </select>
             
             <ul className="popularmovie">
-                {movies.map((movie) => (
+                {Movies.map((movie) => (
                     <li key={movie.id}>
                         <div className='movie'>
                             <div className="genre">
