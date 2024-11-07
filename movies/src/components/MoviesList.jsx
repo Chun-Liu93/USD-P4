@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchMovieList, fetchGenres } from './Api';
 import Pagination from './Pagination'; 
 import "../styles.css";
+import { useMovies } from './MovieContext';
 
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -35,6 +36,7 @@ const MovieList = () => {
     const [pages, setPages] = useState(1);
     const [selectedGenre, setSelectedGenre] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
+    const { handleBlockMovie, handleLikeMovie } = useMovies();
 
     useEffect(() => {
         const loadMoviesAndGenres = async () => {
@@ -107,8 +109,8 @@ const MovieList = () => {
                                     })}
                                 </div>
                                 <p>Release Date: {movie.release_date}</p>
-                                <button className='like'>Like</button>
-                                <button className='block'>Block</button>
+                                <button className='like' onClick={()=>{handleLikeMovie(movie)}}>Like</button>
+                                <button className='block' onClick={()=>{handleBlockMovie(movie)}}>Block</button>
                             </div>
                             <img src={`${MOVIE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
                             <h2>{movie.title}</h2>
