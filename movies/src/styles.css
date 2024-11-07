@@ -149,39 +149,6 @@ h1 {
     text-align: center;
 }
 
-.pagecss {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    margin-left: 100px;
-}
-
-.pagecss p {
-    margin: 0 20px; /* Adjusted margin */
-}
-
-.pagecss button,
-.prevBtn {
-    background-color: grey;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.pagecss button:hover,
-.prevBtn:hover {
-    background-color: blue;
-}
-
-.prevBtn.disabled {
-    background-color: green;
-    color: lightgray;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
 .main input,
 .main select {
     background-color: #f0f0f0;
@@ -211,24 +178,26 @@ select:focus {
     gap: 20px;
 }
 
-.pagination ul {
-    list-style-type: none; /* Remove default list styling */
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
 .pagination a {
     text-decoration: none; /* Remove underline from links */
     color: black; /* Default text color */
     font-size: 1rem; /* Responsive font size */
 }
 
-.pagination a:hover {
-    color: blue; /* Change color on hover */
+.pagination button {
+    width: 80px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.pagination .active a {
+.pagination button:hover {
+    color: blue; /* Change color on hover */
+    background-color: darkgrey;
+    cursor: pointer;
+}
+
+.pagination p {
     font-weight: bold; /* Make active page number bold */
     color: red; /* Active page color */
 }
@@ -243,6 +212,7 @@ select:focus {
     .navbar li {
         margin-right: 0; /* Remove right margin */
         margin-bottom: 10px; /* Add margin below each item */
+        margin-inline: 30px;
     }
 
     .main {
@@ -258,13 +228,12 @@ select:focus {
         margin-top: 20px; /* Add margin to top */
     }
 
-    .pagecss {
-        margin-left: 0; /* Center pagination on small screens */
+    .main select {
+        width: 99%; 
     }
 
-    .main input,
-    .main select {
-        width: 100%; /* Full width on small screens */
+    .main input {
+        width: 93%;
     }
 }
 
@@ -279,6 +248,19 @@ select:focus {
 
     .pagination button {
         padding: 8px 16px; /* Adjust button padding */
+    }
+
+    .genre .like,
+    .genre .block {
+        top: 260px;
+    }
+
+    .genre .like {
+        right: 115px;
+    } 
+
+    .genre .block {
+        left: 115px;
     }
 }
 
