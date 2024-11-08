@@ -17,4 +17,4 @@ Adjusted the like/block buttons based on the different screens sizes.
 Moved the search bar in front of the genre list selection bar.
 
 ## November 7th
-Adjusted the liked/blocked movies page displaying style.
+Adjusted the liked/blocked movies page displaying style and pagination button.
