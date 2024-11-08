@@ -78,9 +78,11 @@ const MovieList = () => {
     const blockMovie=(movie)=>{
         handleBlockMovie(movie);
         alert(`${movie.title} has been Blocked!`)
+        
     }
+
     const Movies = movies.filter(movie => !blockedMovies.some(blockedMovie => blockedMovie.id === movie.id));
-    
+
     if (loading) return <div>Loading...</div>;
 
     return (
