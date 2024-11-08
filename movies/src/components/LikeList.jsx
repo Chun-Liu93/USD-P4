@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchGenres } from './Api';
 import { useMovies } from './MovieContext';
-import "../styles.css";
+import '../styles.css';
 
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -46,7 +46,7 @@ const LikedMovies = () => {
     return (
         <div className='main'>   
             <h1>Liked Movies</h1>
-            <ul className="popularmovie">
+            <ul className="popularmovieliked">
                 {likedMovies.length > 0 ? (
                     likedMovies.map((movie) => (
                         <li key={movie.id}>

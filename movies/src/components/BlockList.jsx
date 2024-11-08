@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import "../styles.css";
 import { useMovies } from './MovieContext';
 import { fetchGenres } from './Api';
+import '../styles.css';
 
 const MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -46,7 +46,7 @@ const BlockedMovies = () => {
     return (
         <div className='main'>
             <h1>Blocked Movies</h1>
-            <ul className="popularmovie">
+            <ul className="popularmovieblocked">
                 {blockedMovies.length > 0 ? (
                     blockedMovies.map((movie) => (
                         <li key={movie.id}>
